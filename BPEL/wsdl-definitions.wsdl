@@ -1,0 +1,34 @@
+<wsdl:definitions
+targetNamespace="http://www.example.com/2"
+xmlns:sns="http://www.example.com/4"
+xmlns:pos="http://www.example.com/3"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<plnk:partnerLinkType name="TTA">
+<plnk:role name="traveler"
+portType="pos:travelerPT" />
+<plnk:role name="agency"
+portType="pos:agencyPT" />
+</plnk:partnerLinkType>
+
+<plnk:partnerLinkType name="TAA">
+<plnk:role name="agency"
+portType="pos:agencyPT" />
+<plnk:role name="airline"
+portType="pos:airlinePT" />
+</plnk:partnerLinkType>
+
+<plnk:partnerLinkType name="TA">
+<plnk:role name="traveler"
+portType="pos:travelerPT" />
+<plnk:role name="airline"
+portType="pos:airlinePT" />
+</plnk:partnerLinkType>
+
+
+
+
+
+</wsdl:definitions>

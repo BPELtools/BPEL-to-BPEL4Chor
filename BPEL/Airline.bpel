@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Airline"
+	targetNamespace="http://www.example.com/1"
+	xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/abstract"
+	abstractProcessProfile="http://docs.oasis-open.org/wsbpel/2.0/process/abstract/ap11/2006/08"
+	xmlns:ns="http://www.example.com/2">
+
+	<partnerLinks>
+		<partnerLink name="toAgency" partnerLinkType="ns:TAA"
+			myRole="airline" partnerRole="agency"/>
+		<partnerLink name="toTraveler" partnerLinkType="ns:TA"
+			myRole="airline" partnerRole="traveler"/>
+	</partnerLinks>
+
+	<sequence>
+
+		<receive name="invokation"
+			partnerLink="toAgency"
+			operation="requestPrice"
+			variable="opaque"
+			createInstance="yes"
+			>
+		</receive>
+
+		<invoke name="sendPrice"
+			partnerLink="toAgency"
+			operation="getPrice"
+			inputVariable="opaque"
+			>
+		</invoke>
+
+		<pick>
+			<onMessage name="TicketOrder"
+				partnerLink="toAgency"
+				operation="TicketOrder"
+				variable="opaque"
+			>
+			
+				<invoke name="sendeTicket"
+					partnerLink="toTraveler"
+					operation="eTicket"
+					inputVariable="opaque"
+				>
+				</invoke>
+
+			</onMessage>
+
+			<onAlarm>
+			<for>"P1D"</for> 
+				<empty/>
+			</onAlarm>
+		</pick>
+
+
+	</sequence>
+
+
+</process>

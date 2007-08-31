@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topology xmlns:Agency="http://www.example.com/1" xmlns:Airline="http://www.example.com/1" xmlns:Traveler="http://www.example.com/1" name="topology" targetNamespace="urn:chor">
+  <participantTypes>
+    <participantType name="Agency_type" participantBehaviorDescription="Agency:Agency" />
+    <participantType name="Airline_type" participantBehaviorDescription="Airline:Airline" />
+    <participantType name="Traveler_type" participantBehaviorDescription="Traveler:Traveler" />
+  </participantTypes>
+  <participants>
+    <participantSet name="Airline_set_1" type="Airline_type" forEach="Agency:2">
+      <participant name="current_Airline_1" forEach="Agency:2" />
+      <participant name="selected_Airline_1" />
+    </participantSet>
+    <participant name="Agency" selects="Airline_set_1" type="Agency_type" />
+    <participant name="Traveler" selects="Agency" type="Traveler_type" />
+  </participants>
+  <messageLinks>
+    <messageLink name="1" sender="Traveler" sendActivity="12" receiver="Agency" receiveActivity="1" messageName="1" />
+    <messageLink name="2" sender="Agency" sendActivity="4" receiver="current_Airline_1" receiveActivity="8" messageName="2" />
+    <messageLink name="3" sender="current_Airline_1" sendActivity="9" receiver="Agency" receiveActivity="5" messageName="3" />
+    <messageLink name="4" sender="Agency" sendActivity="6" receiver="selected_Airline_1" receiveActivity="10" messageName="4" />
+    <messageLink name="5" sender="Agency" sendActivity="7" receiver="Traveler" receiveActivity="13" messageName="5" />
+    <messageLink name="6" sender="selected_Airline_1" sendActivity="11" receiver="Traveler" receiveActivity="14" messageName="6" />
+  </messageLinks>
+</topology>
+

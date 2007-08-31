@@ -1,0 +1,13 @@
+<process xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/abstract" xmlns:ns="http://www.example.com/2" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="Agency" targetNamespace="http://www.example.com/1" abstractProcessProfile="urn:HPI_IAAS:choreography:profile:2006/12-X">
+  <sequence>
+    <receive name="invokation" variable="opaque" createInstance="yes" wsu:id="1" />
+    <forEach wsu:id="2">
+      <scope wsu:id="3">
+        <invoke name="requestPrice" inputVariable="opaque" wsu:id="4" />
+        <receive name="getPrice" variable="opaque" wsu:id="5" />
+      </scope>
+    </forEach>
+    <invoke name="orderTicket" inputVariable="opaque" wsu:id="6" />
+    <invoke name="IssueItinerary" inputVariable="opaque" wsu:id="7" />
+  </sequence>
+</process>

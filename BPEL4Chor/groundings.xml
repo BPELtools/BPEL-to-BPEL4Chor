@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groundings xmlns:top="urn:chor" xmlns:ns1="http://www.example.com/3" topology="top:topology">
+  <messageLinks>
+    <messageLink name="1" portType="ns1:agencyPT" operation="init" />
+    <messageLink name="2" portType="ns1:airlinePT" operation="requestPrice" />
+    <messageLink name="3" portType="ns1:agencyPT" operation="getPrice" />
+    <messageLink name="4" portType="ns1:airlinePT" operation="TicketOrder" />
+    <messageLink name="5" portType="ns1:travelerPT" operation="itinerary" />
+    <messageLink name="6" portType="ns1:travelerPT" operation="eTicket" />
+  </messageLinks>
+  <properties />
+</groundings>
+

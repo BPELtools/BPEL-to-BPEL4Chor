@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="Agency"
+	targetNamespace="http://www.example.com/1"
+	xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/abstract"
+	abstractProcessProfile="http://docs.oasis-open.org/wsbpel/2.0/process/abstract/ap11/2006/08"
+	xmlns:ns="http://www.example.com/2">
+
+	<partnerLinks>
+		<partnerLink name="toTraveler" partnerLinkType="ns:TTA"
+			myRole="agency" partnerRole="traveler"/>
+		<partnerLink name="toSelectedAirline" partnerLinkType="ns:TAA"
+			myRole="agency" partnerRole="airline"/>
+	</partnerLinks>
+
+
+	<sequence>
+
+	<receive name="invokation"
+		partnerLink="toTraveler"
+		operation="init"
+		variable="opaque"
+		createInstance="yes"
+		>
+	</receive>
+
+	<forEach counterName="Counter">
+		<startCounterValue>0</startCounterValue>
+		<finalCounterValue>count($set/)</finalCounterValue>
+
+		<scope>
+		
+		<partnerLinks>
+			<partnerLink name="toAirline" partnerLinkType="ns:TAA"
+				myRole="agency" partnerRole="airline"/>
+		</partnerLinks>
+
+			<assign>
+				<copy>
+					<from >
+						<query>[$Counter]</query>
+					</from>
+					<to partnerLink="toAirline"/>
+				</copy>
+			</assign>
+	
+				
+			<invoke name="requestPrice"
+				partnerLink="toAirline"
+				operation="requestPrice"
+				inputVariable="opaque"
+				>
+			</invoke>
+
+			<receive name="getPrice"
+				partnerLink="toAirline"
+				operation="getPrice"
+				variable="opaque"
+				>
+			</receive>
+
+		</scope>
+
+	</forEach>
+
+	<invoke name="orderTicket"
+		partnerLink="toSelectedAirline"
+		operation="TicketOrder"
+		inputVariable="opaque"
+		>
+	</invoke>
+
+	<invoke name="IssueItinerary"
+		partnerLink="toTraveler"
+		operation="itinerary"
+		inputVariable="opaque"
+		>
+	</invoke>
+
+	</sequence>
+
+</process>
