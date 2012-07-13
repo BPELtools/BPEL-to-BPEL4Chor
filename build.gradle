@@ -1,0 +1,14 @@
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+mainClassName = "Main"
+
+repositories {
+	maven {
+		url "http://repo1.maven.org/maven2/"
+	}
+}
+
+dependencies {
+    compile group: 'jdom', name: 'jdom', version: '1.0'
+} 
