@@ -6,7 +6,7 @@ This project transforms a set of BPEL processes to a BPEL4Chor choreography.
 Building
 --------
 
-CrossRefX can be built using [gradle](http://www.gradle.org/).
+BPEL-to-BPEL4Chor can be built using [gradle](http://www.gradle.org/).
 
 Eclipse
 -------
